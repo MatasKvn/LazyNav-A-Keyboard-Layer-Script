@@ -14,12 +14,12 @@
     'o': End
     'y': Page Up
     'h': Page Down
+    'd': 'shift'
+    'f': 'ctrl'
 
     Deletion Keys:
     'p': Delete
     ';': Backspace
-    'd': 'shift'
-    'f': 'ctrl'
 
 
 ## Prerequisites
