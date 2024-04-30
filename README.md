@@ -1,6 +1,6 @@
 # LazyWrite 
 
-**LazyWrite** is a simple python script that allows you to have an additional keyboard layer for navigation. This temporarily remaps easily accessible keys like 'j', 'k', and 'l' to frequently used far away keys like the arrow, or page up/down keys to make text navigation easy and convenient. Simply toggle the \<alt> + \<capsLock> combination. You will hear a sound that indicates you enabled/disabled navigation mode.
+**LazyWrite** is a simple python script that allows you to have an additional keyboard layer for navigation. This temporarily remaps easily accessible keys like 'j', 'k', and 'l' to frequently used, far away keys like the arrow, or page up/down keys to make text navigation easy and convenient. When \<CAPSLOCK> is held down the navigation mode is enabled and is disabled when \<CAPSLOCK> is released.
 
 ## The keybindings
     Arrow Keys:
@@ -18,6 +18,8 @@
     Deletion Keys:
     'p': Delete
     ';': Backspace
+    'd': 'shift'
+    'f': 'ctrl'
 
 
 ## Prerequisites
