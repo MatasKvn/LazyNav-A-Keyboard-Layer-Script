@@ -1,15 +1,13 @@
+from typing import Dict, Tuple
 import keyboard
 from pynput.keyboard import Key, Controller
-import winsound
+from time import time
 
-# Sounds
-sound_navigate = 'C:\\Windows\\Media\\chimes.wav'
-sound_default = 'C:\\Windows\\Media\\Windows Balloon.wav'
-
-toggle_navigate_mode_hotkey = 'alt + capsLock'
+holdKey: str = 'capsLock'
+capsTimeout: float = 0.2  # CapsLock is enabled if it is pressed for shorter than this
 
 # Arrow Keys (Use 'pynput' for keys that are within nupad)
-MAPPINGS_numpad = {
+MAPPINGS_numpad: Dict[str, str] = {
     'i': Key.up,
     'j': Key.left,
     'k': Key.down,
@@ -23,7 +21,7 @@ MAPPINGS_numpad = {
 }
 
 # Uses 'keyboard' module
-MAPPINGS_other = {
+MAPPINGS_other: Dict[str, str] = {
     # 
     ';': 'backspace',
     'p': 'del',
@@ -33,27 +31,33 @@ MAPPINGS_other = {
 }
 
 
-is_navigate: bool = False
-
-def on_toggle_navigate_mode():
-    global is_navigate
-    is_navigate = not is_navigate
-    enable_navigate_mode() if is_navigate else disable_navigate_mode()
-        
 KeyboardController = Controller()
-def enable_navigate_mode():
-    winsound.PlaySound(sound_navigate, winsound.SND_ASYNC)
+
+is_lazywrite_enabled: bool = False
+lastToggle: float | None = None
+
+def enable_lazy_write():
+    global is_lazywrite_enabled, lastToggle
+    if is_lazywrite_enabled:
+        return
+    lastToggle = time()
+    is_lazywrite_enabled = True
     for key, val in MAPPINGS_other.items():
         keyboard.remap_key(key, val)
     for key, val in MAPPINGS_numpad.items():
         keyboard.on_press_key(key, lambda keyEvent, val=val: KeyboardController.tap(val), suppress=True)
 
-def disable_navigate_mode():
-    winsound.PlaySound(sound_default, winsound.SND_ASYNC)
+def disable_lazy_write():
+    global is_lazywrite_enabled, lastToggle
+    is_lazywrite_enabled = False
+    if time() - lastToggle >= capsTimeout:
+        keyboard.press_and_release(holdKey)
     keyboard.unhook_all()
-    keyboard.add_hotkey(toggle_navigate_mode_hotkey, on_toggle_navigate_mode, suppress=True)
-    
+    keyboard.on_press_key(holdKey, lambda key: enable_lazy_write())
+    keyboard.on_release_key(holdKey, lambda key: disable_lazy_write())
 
-keyboard.add_hotkey(toggle_navigate_mode_hotkey, on_toggle_navigate_mode, suppress=True)
+
+keyboard.on_press_key(holdKey, lambda key: enable_lazy_write())
+keyboard.on_release_key(holdKey, lambda key: disable_lazy_write())
 
 keyboard.wait()
