@@ -1,10 +1,10 @@
-from typing import Dict, Tuple
+from typing import Dict
 import keyboard
 from pynput.keyboard import Key, Controller
 from time import time
 
 holdKey: str = 'capsLock'
-capsTimeout: float = 0.2  # CapsLock is enabled if it is pressed for shorter than this
+capsTimeout: float = 0.15  # CapsLock is enabled if it is pressed for shorter than this
 
 # Arrow Keys (Use 'pynput' for keys that are within nupad)
 MAPPINGS_numpad: Dict[str, str] = {

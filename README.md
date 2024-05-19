@@ -1,6 +1,6 @@
-# LazyWrite 
+# Lazy-Nav 
 
-**LazyWrite** is a simple python script that allows you to have an additional keyboard layer for navigation. This temporarily remaps easily accessible keys like 'j', 'k', and 'l' to frequently used, far away keys like the arrow, or page up/down keys to make text navigation easy and convenient. When \<CAPSLOCK> is held down the navigation mode is enabled and is disabled when \<CAPSLOCK> is released.
+**Lazy-Nav** is a simple python script that allows you to have an additional keyboard layer for navigation. This temporarily remaps easily accessible keys like 'j', 'k', and 'l' to frequently used, far away keys like the arrow, or page up/down keys to make text navigation easy and convenient. When \<CAPSLOCK> is held down the navigation mode is enabled and is disabled when \<CAPSLOCK> is released.
 
 ## The keybindings
     Arrow Keys:
@@ -14,6 +14,7 @@
     'o': End
     'y': Page Up
     'h': Page Down
+    
     'd': 'shift'
     'f': 'ctrl'
 
@@ -26,7 +27,7 @@
 1. Python
 2. Python libraries (installed using *pip*):
     * The *keyboard* module: `pip install keyboard`
-    * The *pyinput* module: `pip install keyboard`
+    * The *pynput* module: `pip install pynput`
 
 ## Usage
 Windows: Simply put the `.pyw` file in the Startup folder. This will start the script everytime your pc turn on.
