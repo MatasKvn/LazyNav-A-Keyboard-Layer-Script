@@ -52,6 +52,8 @@ def disable_lazy_write():
     is_lazywrite_enabled = False
     if time() - lastToggle >= capsTimeout:
         keyboard.press_and_release(holdKey)
+    keyboard.release('shift')
+    keyboard.release('ctrl')
     keyboard.unhook_all()
     keyboard.on_press_key(holdKey, lambda key: enable_lazy_write())
     keyboard.on_release_key(holdKey, lambda key: disable_lazy_write())
